@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="hero-bg py-5 min-vh-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-10">
+                <div class="glass-card p-4 p-md-5">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+                        <div>
+                            <span class="badge rounded-pill text-bg-success mb-3">Analysis Complete</span>
+                            <h1 class="display-6 fw-bold mb-2">Resume Match Report</h1>
+                            <p class="text-secondary mb-0">ATS score, keyword match, missing skills, and interview questions are shown below.</p>
+                        </div>
+                        <a href="/" class="btn btn-outline-primary rounded-pill px-4">Analyze Another</a>
+                    </div>
+
+                    <div class="score-box mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 class="mb-0">ATS Score</h4>
+                            <span class="score-pill" th:text="${analysis.atsScore} + '%'">0%</span>
+                        </div>
+                        <div class="progress" style="height: 14px;">
+                            <div class="progress-bar" role="progressbar"
+                                 th:style="'width: ' + ${analysis.atsScore} + '%'"
+                                 th:attr="aria-valuenow=${analysis.atsScore}"
+                                 aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+
+                    <div class="row g-4 mb-4">
+                        <div class="col-12 col-lg-6">
+                            <div class="result-card h-100">
+                                <h5 class="fw-bold mb-3">Matched Keywords</h5>
+                                <div class="chips">
+                                    <span class="chip" th:each="k : ${matchedList}" th:text="${k}"></span>
+                                    <span class="text-secondary" th:if="${#arrays.isEmpty(matchedList)}">No keywords matched.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <div class="result-card h-100">
+                                <h5 class="fw-bold mb-3">Missing Keywords</h5>
+                                <div class="chips">
+                                    <span class="chip chip-warn" th:each="k : ${missingList}" th:text="${k}"></span>
+                                    <span class="text-secondary" th:if="${#arrays.isEmpty(missingList)}">No missing keywords.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card mb-4">
+                        <h5 class="fw-bold mb-3">Interview Questions</h5>
+                        <ol class="mb-0 ps-3">
+                            <li class="mb-2" th:each="q : ${questionsList}" th:text="${q}"></li>
+                        </ol>
+                    </div>
+
+                    <a href="/history" class="btn btn-light border">Open History</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

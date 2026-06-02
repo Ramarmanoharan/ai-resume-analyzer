@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container py-5">
+    <h1 class="mb-4">Analysis History</h1>
+    <a href="/" class="btn btn-primary mb-3">Back</a>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>File Name</th>
+            <th>ATS Score</th>
+            <th>Analyzed At</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${historyList}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.resumeFileName}"></td>
+            <td th:text="${item.atsScore}"></td>
+            <td th:text="${item.analyzedAt}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
